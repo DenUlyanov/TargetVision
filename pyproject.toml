@@ -5,9 +5,10 @@ description = "An app for detecting and scoring arrows on a 40cm FITA target fac
 authors = [{ name = "Den", email = "ulyanovdenis@gmail.com" }]
 license = { text = "MIT" }
 dependencies = [
-    "opencv-python",    # For image processing
-    "numpy",            # Numerical operations
-    "scipy",            # Advanced image transformations
+    "opencv-python", # For image processing
+    "numpy", # Numerical operations
+    "scipy", # Advanced image transformations
+    "pytest"
 ]
 
 [tool.ruff]
@@ -16,10 +17,6 @@ target-version = "py311"
 
 [tool.black]
 line-length = 88
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-addopts = "--disable-warnings"
 
 [build-system]
 requires = ["setuptools"]
