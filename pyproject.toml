@@ -8,7 +8,8 @@ dependencies = [
     "opencv-python", # For image processing
     "numpy", # Numerical operations
     "scipy", # Advanced image transformations
-    "pytest"
+    "pytest", # Test framework
+    "polarTransform" # Image transformation and cleanup
 ]
 
 [tool.ruff]

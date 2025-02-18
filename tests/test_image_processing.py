@@ -3,7 +3,7 @@ import os
 import numpy as np
 import pytest
 
-from src.image_processing import load_image
+from src.image_loader import load_image
 
 
 def test_load_image_valid():
@@ -12,7 +12,7 @@ def test_load_image_valid():
     assert os.path.exists(test_image_path), "Test image does not exist"
     img = load_image(test_image_path)
     assert img is not None
-    assert isinstance(img, np.ndarray)  # Ensure it's a valid OpenCV image
+    assert isinstance(img, np.ndarray)
 
 
 def test_load_image_invalid():
