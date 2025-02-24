@@ -21,15 +21,15 @@ if __name__ == "__main__":
 
     # Convert to grayscale
     greyed = convert_to_grayscale(image)
-    display_image(greyed, "Grayscale Image")
+    display_image(greyed, "Grayscale")
 
     # Blur image
-    blured = apply_blur(greyed, 53)
+    blured = apply_blur(greyed, 3)
     display_image(blured, "Blur image")
-    save_image(blured, "before.jpeg")
+    save_image(blured, "blured.jpeg")
 
     # Show center
-    # img_centered = display_target_center(blur_img, x, y)
+    # img_centered = display_target_center(blured, x, y)
     # display_image(img_centered, "Centered")
 
     # Apply geometric correction
@@ -37,4 +37,4 @@ if __name__ == "__main__":
     display_image(geometric, "Geometry")
 
     # Save image for debugging
-    save_image(geometric, "after.jpeg")
+    save_image(geometric, "latest.jpeg")

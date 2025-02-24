@@ -10,9 +10,10 @@ def convert_to_grayscale(image):
     """
     if image is None:
         raise ValueError("Invalid image provided for grayscale conversion.")
-
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    _, binary = cv2.threshold(gray, 128, 255, cv2.THRESH_BINARY)
+    binary = cv2.adaptiveThreshold(
+        gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+    )
 
     return binary
 
