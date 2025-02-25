@@ -1,6 +1,7 @@
 import os
 
-from src.color_correction import convert_to_grayscale, apply_blur
+from src.color_correction import convert_to_grayscale, apply_blur, enhance_contrast
+from src.edge_detection import canny_edge_detection
 from src.fourier_transform import fourier_transformation
 from src.geometry_correction import find_target_center, apply_geometric_correction, \
     denoise_old_holes, display_target_center
@@ -24,10 +25,13 @@ if __name__ == "__main__":
     greyed = convert_to_grayscale(image)
     display_image(greyed, "Grayscale")
 
+    # Enhance contrast
+    contrasted = enhance_contrast(greyed)
+    display_image(contrasted, "Contrasted")
+
     # Blur image
-    blured = apply_blur(greyed, 3)
+    blured = apply_blur(contrasted, 3)
     display_image(blured, "Blur image")
-    save_image(blured, "blured.jpeg")
 
     # Show center
     # img_centered = display_target_center(blured, x, y)
@@ -41,5 +45,9 @@ if __name__ == "__main__":
     fft_transformed = fourier_transformation(geometric, 10)
     display_image(fft_transformed, "FFT")
 
+    # Apply Canny edge detection
+    edged = canny_edge_detection(fft_transformed, 450, 500)
+    display_image(edged, "Edged")
+
     # Save image for debugging
-    save_image(fft_transformed, "latest.jpeg")
+    save_image(edged, "latest.jpeg")
