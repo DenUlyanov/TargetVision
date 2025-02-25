@@ -1,6 +1,7 @@
 import os
 
 from src.color_correction import convert_to_grayscale, apply_blur
+from src.fourier_transform import fourier_transformation
 from src.geometry_correction import find_target_center, apply_geometric_correction, \
     denoise_old_holes, display_target_center
 from src.image_loader import load_image, display_image, save_image
@@ -36,5 +37,9 @@ if __name__ == "__main__":
     geometric = apply_geometric_correction(blured)
     display_image(geometric, "Geometry")
 
+    # Apply FFT transformation
+    fft_transformed = fourier_transformation(geometric, 10)
+    display_image(fft_transformed, "FFT")
+
     # Save image for debugging
-    save_image(geometric, "latest.jpeg")
+    save_image(fft_transformed, "latest.jpeg")
