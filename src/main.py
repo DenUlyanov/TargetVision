@@ -1,10 +1,9 @@
 import os
 
 from src.color_correction import convert_to_grayscale, apply_blur, enhance_contrast
-from src.edge_detection import canny_edge_detection
+from src.edge_detection import canny_edge_detection, morphological_closing
 from src.fourier_transform import fourier_transformation
-from src.geometry_correction import find_target_center, apply_geometric_correction, \
-    denoise_old_holes, display_target_center
+from src.geometry_correction import find_target_center, apply_geometric_correction
 from src.image_loader import load_image, display_image, save_image
 
 if __name__ == "__main__":
@@ -49,5 +48,9 @@ if __name__ == "__main__":
     edged = canny_edge_detection(fft_transformed, 450, 500)
     display_image(edged, "Edged")
 
+    # Apply morphological closing
+    cleaned = morphological_closing(edged)
+    display_image(cleaned, "Cleaned")
+
     # Save image for debugging
-    save_image(edged, "latest.jpeg")
+    save_image(cleaned, "latest.jpeg")
