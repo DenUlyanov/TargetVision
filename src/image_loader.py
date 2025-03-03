@@ -1,6 +1,7 @@
 import os
 
 import cv2
+import numpy as np
 
 
 def load_image(image_path: str):
@@ -25,6 +26,7 @@ def display_image(image, window_name="Image", delay=10000):
     cv2.imshow(window_name, image)
     cv2.waitKey(delay)
     cv2.destroyAllWindows()
+
 
 
 def save_image(image, filename, output_dir="output"):

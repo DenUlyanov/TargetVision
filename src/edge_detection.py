@@ -23,3 +23,29 @@ def morphological_closing(image, kernel_size: int = 3):
     edges_closed = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel)
 
     return edges_closed
+
+
+def canny_circle_detection(image):
+    circles = cv2.HoughCircles(
+        image,  # can also try edges_closed instead of blur
+        cv2.HOUGH_GRADIENT,
+        dp=1.7,  # 1:1 resolution ratio
+        minDist=10,  # Minimum distance between circle centers in pixels
+        param1=100,  # Upper threshold for the internal Canny (lower is param1/2)
+        param2=550,  # Higher = fewer false positives, might go 60–120 range
+        minRadius=0,  # Smallest ring radius (in pixels)
+        maxRadius=0
+    )
+    return np.uint16(np.around(circles))
+
+
+def draw_circles(image, circles):
+    if circles is not None:
+        # Round and cast the (x, y, radius) values to integers
+        circles = np.round(circles[0, :]).astype("int")
+
+        for (x, y, r) in circles:
+            # Draw the outer circle
+            cv2.circle(image, (x, y), r, (0, 255, 0), 8)
+
+    return image
