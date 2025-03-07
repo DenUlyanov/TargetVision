@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
     # Load and display original image
     image = load_image(img_path)  # Load image with absolute path
-    # display_image(image, "Loaded Image")
+    display_image(image, "Loaded Image")
 
     # Find center of the image
     x, y, r = find_target_center(image)
@@ -22,15 +22,15 @@ if __name__ == "__main__":
 
     # Convert to grayscale
     greyed = convert_to_grayscale(image)
-    # display_image(greyed, "Grayscale")
+    display_image(greyed, "Grayscale")
 
     # Enhance contrast
     contrasted = enhance_contrast(greyed)
-    # display_image(contrasted, "Contrasted")
+    display_image(contrasted, "Contrasted")
 
     # Blur image
     blured = apply_blur(contrasted, 3)
-    # display_image(blured, "Blur image")
+    display_image(blured, "Blur image")
 
     # Show center
     # img_centered = display_target_center(blured, x, y)
@@ -38,22 +38,24 @@ if __name__ == "__main__":
 
     # Apply geometric correction
     geometric = apply_geometric_correction(blured)
-    # display_image(geometric, "Geometry")
+    display_image(geometric, "Geometry")
 
     # Apply FFT transformation
     fft_transformed = fourier_transformation(geometric, 10)
-    # display_image(fft_transformed, "FFT")
+    display_image(fft_transformed, "FFT")
 
     # Apply Canny edge detection
     edged = canny_edge_detection(fft_transformed, 450, 500)
-    # display_image(edged, "Edged")
+    display_image(edged, "Edged")
+    save_image(edged, "edged.jpeg")
 
     # Apply morphological closing
     cleaned = morphological_closing(edged)
-    # display_image(cleaned, "Cleaned")
+    display_image(cleaned, "Cleaned")
+    save_image(cleaned, "cleaned.jpeg")
 
     # Detect circles
-    circles = canny_circle_detection(edged)
+    circles = canny_circle_detection(cleaned)
     circles_visualized = draw_circles(geometric, circles)
     display_image(circles_visualized, "Circles")
 
